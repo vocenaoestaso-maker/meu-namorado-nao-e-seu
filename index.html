@@ -28,6 +28,8 @@ p{margin:.4rem 0 1rem}
 a.card:hover,a.card:focus-visible{outline:2px solid var(--burg);outline-offset:2px}
 .card small{display:block;color:var(--muted);font-size:.8rem}
 .soon{opacity:.7}
+.th{width:4.4rem;height:4.4rem;border-radius:.4rem;object-fit:cover;flex:none}
+.th+span{flex:1}
 .tag{font-size:.8rem;color:var(--muted);white-space:nowrap}
 .go{font-weight:600;color:var(--burg);white-space:nowrap}
 .tk{display:block;margin-top:2.4rem;text-align:center;font-weight:600;color:var(--burg)}
@@ -67,24 +69,25 @@ const GRUPOS=[
   {nome:"Kit de maquiagem completo Ruby Rose",nota:"Para o rosto inteiro",url:"https://s.shopee.com.br/7Aeog4hw8L"},
   {nome:"Kit com 16 pincéis de maquiagem",nota:"Para aplicar tudo",url:"https://s.shopee.com.br/114BKh29l4"}]},
  {titulo:"Praia da Lorena",itens:[
-  {nome:"Óculos de sol gatinho",nota:"Armação preta, lente degradê",url:"https://s.shopee.com.br/5AtmBh4Fs0"},
-  {nome:"Biquíni regulagem fio duplo",nota:"Vários modelos e cores",url:"https://s.shopee.com.br/70LQQgye0v"}]},
- {titulo:"Os looks do vídeo da Lorena",itens:[
-  {nome:"Look de praia: conjunto de camisa e short branco",nota:"Parecido com o do vídeo",url:"https://s.shopee.com.br/60SuMZpkFT"},
-  {nome:"Look de noite: vestido dourado",nota:"Parecido com o do vídeo",url:"https://s.shopee.com.br/5LD9FoQq9a"},
-  {nome:"Look de academia: conjunto top e short",nota:"Parecido com o do vídeo",url:"https://s.shopee.com.br/4B1GBl9O5G"},
-  {nome:"Look de café: suéter de tricô",nota:"Parecido com o do vídeo",url:"https://s.shopee.com.br/4LKgOMVrpp"}]}
+  {nome:"Óculos de sol gatinho",nota:"Armação preta, lente degradê",url:"https://s.shopee.com.br/5AtmBh4Fs0",img:"img/oculos.jpg"},
+  {nome:"Biquíni regulagem fio duplo",nota:"Vários modelos e cores",url:"https://s.shopee.com.br/70LQQgye0v",img:"img/biquini.jpg"}]},
+ {titulo:"Os looks do vídeo da Lorena",aviso:"Peças parecidas com as do vídeo.",itens:[
+  {nome:"Look de praia",nota:"Conjunto de camisa e short branco",url:"https://s.shopee.com.br/60SuMZpkFT",img:"img/praia.jpg"},
+  {nome:"Look de noite",nota:"Vestido dourado",url:"https://s.shopee.com.br/5LD9FoQq9a"},
+  {nome:"Look de academia",nota:"Conjunto de top e short",url:"https://s.shopee.com.br/4B1GBl9O5G",img:"img/fitness.jpg"},
+  {nome:"Look de café",nota:"Suéter de tricô",url:"https://s.shopee.com.br/4LKgOMVrpp",img:"img/cafe.jpg"}]}
 ];
 const el=document.getElementById('lista');
 GRUPOS.forEach(g=>{
  const s=document.createElement('section');s.className='group';
  const h=document.createElement('h2');h.textContent=g.titulo;s.appendChild(h);
+ if(g.aviso){const n=document.createElement('p');n.className='tag';n.style.whiteSpace='normal';n.textContent=g.aviso;s.appendChild(n);}
  g.itens.forEach(i=>{
   const ok=!!i.url;
   const c=document.createElement(ok?'a':'div');
   c.className='card'+(ok?'':' soon');
   if(ok){c.href=i.url;c.target='_blank';c.rel='noopener'}
-  c.innerHTML='<span>'+i.nome+'<small>'+i.nota+'</small></span><span class="'+(ok?'go':'tag')+'">'+(ok?(i.rotulo||'Ver na Shopee'):'em breve')+'</span>';
+  c.innerHTML=(i.img?'<img class="th" src="'+i.img+'" alt="" loading="lazy">':'')+'<span>'+i.nome+'<small>'+i.nota+'</small></span><span class="'+(ok?'go':'tag')+'">'+(ok?(i.rotulo||'Ver na Shopee'):'em breve')+'</span>';
   s.appendChild(c);
  });
  el.appendChild(s);
