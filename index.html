@@ -29,7 +29,7 @@ a.card:hover,a.card:focus-visible{outline:2px solid var(--burg);outline-offset:2
 .card small{display:block;color:var(--muted);font-size:.8rem}
 .soon{opacity:.7}
 .th{width:4.4rem;height:4.4rem;border-radius:.4rem;object-fit:cover;flex:none}
-.th+span{flex:1}
+.th+span{flex:1}.th.capa{width:4.4rem;height:7.8rem}
 .tag{font-size:.8rem;color:var(--muted);white-space:nowrap}
 .go{font-weight:600;color:var(--burg);white-space:nowrap}
 .tk{display:block;margin-top:2.4rem;text-align:center;font-weight:600;color:var(--burg)}
@@ -54,7 +54,7 @@ a.card:hover,a.card:focus-visible{outline:2px solid var(--burg);outline-offset:2
 /* Para incluir um link: preencha "url" do item. Sem url, ele aparece como "em breve". */
 const GRUPOS=[
  {titulo:"O tutorial completo",itens:[
-  {nome:"E-book: Meu namorado não é seu",nota:"24 páginas ilustradas, para ele ficar bonitão",url:"https://danilogti.gumroad.com/l/meu-namorado-nao-e-seu",rotulo:"Quero o e-book"}]},
+  {nome:"E-book: Meu namorado não é seu",nota:"24 páginas ilustradas, para ele ficar bonitão",url:"https://danilogti.gumroad.com/l/meu-namorado-nao-e-seu",rotulo:"Quero o e-book",img:"img/ebook.jpg",capa:1}]},
  {titulo:"O look do Arthur",itens:[
   {nome:"Camiseta branca básica",nota:"Look 2: dia a dia",url:"https://s.shopee.com.br/9APt677G8Z",img:"img/camiseta.jpg"},
   {nome:"Calça jeans azul",nota:"Reta, azul médio",url:"https://s.shopee.com.br/80DvhyBhVM",img:"img/jeans.jpg"},
@@ -87,7 +87,7 @@ GRUPOS.forEach(g=>{
   const c=document.createElement(ok?'a':'div');
   c.className='card'+(ok?'':' soon');
   if(ok){c.href=i.url;c.target='_blank';c.rel='noopener'}
-  c.innerHTML=(i.img?'<img class="th" src="'+i.img+'" alt="" loading="lazy">':'')+'<span>'+i.nome+'<small>'+i.nota+'</small></span><span class="'+(ok?'go':'tag')+'">'+(ok?(i.rotulo||'Ver na Shopee'):'em breve')+'</span>';
+  c.innerHTML=(i.img?'<img class="th'+(i.capa?' capa':'')+'" src="'+i.img+'" alt="" loading="lazy">':'')+'<span>'+i.nome+'<small>'+i.nota+'</small></span><span class="'+(ok?'go':'tag')+'">'+(ok?(i.rotulo||'Ver na Shopee'):'em breve')+'</span>';
   s.appendChild(c);
  });
  el.appendChild(s);
